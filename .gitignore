@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.DS_Store
+runs/
+personal/
+vqvae.log
+vqvae_summary.log
+*.broken_backup
