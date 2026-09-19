@@ -8,3 +8,24 @@ personal/
 vqvae.log
 vqvae_summary.log
 *.broken_backup
+
+# Experiment outputs / personal files
+runs/
+personal/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# Misc
+.DS_Store
