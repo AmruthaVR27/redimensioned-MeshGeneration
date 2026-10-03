@@ -409,8 +409,8 @@ def main():
                         help="Number of SEDD diffusion steps (fewer = faster)")
     parser.add_argument("--skip_dot_full_gen", action="store_true",
                         help="Skip slow DoT full-generation accuracy step")
-    parser.add_argument("--dot_n_eval", type=int, default=200,
-                        help="Number of val samples to use for DoT prefix eval (fewer = faster)")
+    parser.add_argument("--dot_n_eval", type=int, default=None,
+                        help="Number of val samples to use for DoT prefix eval (default: all)")
     parser.add_argument("--device", type=str,
                         default="cuda:0" if torch.cuda.is_available() else "cpu")
     args = parser.parse_args()
@@ -545,8 +545,8 @@ def main():
 
             # ── Step 7b: DoT prefix truncation + completion ───────────────────
             print("\n[STEP 7b] DoT semantic channel (prefix truncation) ...")
-            # Subsample val set to keep autoregressive generation tractable
-            n_dot = min(args.dot_n_eval, len(real_tokens))
+            # Subsample val set only if --dot_n_eval is given (default: all)
+            n_dot = len(real_tokens) if args.dot_n_eval is None else min(args.dot_n_eval, len(real_tokens))
             dot_eval_tokens = real_tokens[:n_dot]
             dot_eval_labels = real_labels[:n_dot]
             print(f"  Using {n_dot} val samples for DoT prefix eval")
